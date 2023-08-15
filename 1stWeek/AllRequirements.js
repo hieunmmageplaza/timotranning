@@ -10,13 +10,32 @@ async function fetchData(url) {
         throw e;
     }
 }
-async function getCustomerData() {
+
+async function fetchAllData() {
     try {
         const [users, posts, comments] = await Promise.all([
             fetchData(`${apiUrl}/users`),
             fetchData(`${apiUrl}/posts`),
             fetchData(`${apiUrl}/comments`)
         ]);
+        return [users, posts, comments];
+    } catch (e) {
+        console.error(e.message);
+        throw e;
+    }
+}
+async function writeJsonFile(filename, data) {
+    try {
+        fs.writeFileSync(filename, JSON.stringify(data, null, 2));
+    } catch (e) {
+        console.error(e.message);
+    }
+}
+
+//Requirement 3: Get all the posts and comments from the API. Map the data with the users array.
+async function getCustomerData() {
+    try {
+        const [users, posts, comments] = await fetchAllData();
 
         const usersData = users.map(user => {
             const userPosts = posts
@@ -46,19 +65,24 @@ async function getCustomerData() {
             };
         });
         fs.writeFileSync('./requirement3.json', JSON.stringify(usersData, null, 2));
-        // console.log(JSON.stringify(usersData, null, 2));
     } catch (e) {
         console.error(e.message);
     }
 }
 
+(async () => {
+    try {
+        await getCustomerData();
+    } catch (e) {
+        console.error(e.message);
+    }
+})();
+
+//Requirement 4: Filter only users with more than 3 comments.
 async function filterUserMore3Commands() {
     try {
-        const [users, posts, comments] = await Promise.all([
-            fetchData(`${apiUrl}/users`),
-            fetchData(`${apiUrl}/posts`),
-            fetchData(`${apiUrl}/comments`)
-        ]);
+        const [users, posts, comments] = await fetchAllData();
+
 
         const usersMore3Comments = users
             .map(user => {
@@ -76,20 +100,17 @@ async function filterUserMore3Commands() {
             })
             .filter(user => user.comments.length > 3);
 
-        // console.log(JSON.stringify(usersMore3Comments, null, 2));
         fs.writeFileSync('./requirement4.json', JSON.stringify(usersMore3Comments, null, 2));
     } catch (e) {
         console.error(e.message);
     }
 }
 
+//Requirement 5: Reformat the data with the count of comments and posts
+
 async function organizeData() {
     try {
-        const [users, posts, comments] = await Promise.all([
-            fetchData(`${apiUrl}/users`),
-            fetchData(`${apiUrl}/posts`),
-            fetchData(`${apiUrl}/comments`)
-        ]);
+        const [users, posts, comments] = await fetchAllData();
 
         const usersData = users.map(user => {
             const userPosts = posts.filter(post => post.userId === user.id);
@@ -105,7 +126,6 @@ async function organizeData() {
             };
         });
 
-        // console.log(JSON.stringify(usersData, null, 2));
         fs.writeFileSync('./requirement5.json', JSON.stringify(usersData, null, 2));
 
     } catch (e) {
@@ -113,13 +133,10 @@ async function organizeData() {
     }
 }
 
+// Requirement 6 :Who is the user with the most comments/posts?
 async function getTheFirstOneWithPost() {
     try {
-        const [users, posts, comments] = await Promise.all([
-            fetchData(`${apiUrl}/users`),
-            fetchData(`${apiUrl}/posts`),
-            fetchData(`${apiUrl}/comments`)
-        ]);
+        const [users, posts, comments] = await fetchAllData();
 
         let mostActiveUser = {
             id: null,
@@ -152,13 +169,11 @@ async function getTheFirstOneWithPost() {
     }
 }
 
+//Requirement 7: Sort the list of users by the postsCount value descending?
 async function sortUsersByPostsCount() {
     try {
-        const [users, posts, comments] = await Promise.all([
-            fetchData(`${apiUrl}/users`),
-            fetchData(`${apiUrl}/posts`),
-            fetchData(`${apiUrl}/comments`)
-        ]);
+        const [users, posts] = await fetchAllData();
+
         const userData = users.map(user => {
             const userPosts = posts.filter(post => post.userId === user.id);
 
@@ -170,45 +185,28 @@ async function sortUsersByPostsCount() {
 
         })
         const sortedUsers = userData.sort((a, b) => b.postCount - a.postCount);
-        // const sortedUsers = userData.sort((a, b) => b.id - a.id);
-
-        fs.writeFileSync('./requirement7.json', JSON.stringify(sortedUsers, null, 2));
+        writeJsonFile('./requirement7.json', sortedUsers);
     } catch (e) {
         console.error(e.message);
     }
 }
 
+//Requirement 8: Get the post with ID of 1 via API request, at the same time get comments for post ID of 1 via another API request.
 async function getPostWithComments(postId) {
     try {
-        const postResponse = await fetch(`${apiUrl}/posts/${postId}`);
-        const post = await postResponse.json();
+        const { comments, posts } = await fetchAllData();
+        const post = posts.find(post => post.id === postId);
 
-        const commentsResponse = await fetch(`${apiUrl}/posts/${postId}/comments`);
-        const comments = await commentsResponse.json();
+        if (post) {
+            const postComments = comments.filter(comment => comment.postId === postId);
 
-        // console.log(JSON.stringify(usersData, null, 2));
-        post.comments = comments;
+            post.comments = postComments;
 
-        return fs.writeFileSync('./requirement8.json', JSON.stringify(post, null, 2));
-
+            return writeJsonFile('./requirement8.json',post);
+        } else {
+            console.error(`Post with ID ${postId} not found.`);
+        }
     } catch (e) {
         console.error(e.message);
     }
 }
-//Requirement 3: Get all the posts and comments from the API. Map the data with the users array.
-getCustomerData();
-
-//Requirement 4: Filter only users with more than 3 comments.
-filterUserMore3Commands();
-
-//Requirement 5: Reformat the data with the count of comments and posts
-organizeData();
-
-// Requirement 6 :Who is the user with the most comments/posts?
-getTheFirstOneWithPost();
-
-//Requirement 7: Sort the list of users by the postsCount value descending?
-sortUsersByPostsCount();
-
-//Requirement 8: Get the post with ID of 1 via API request, at the same time get comments for post ID of 1 via another API request.?
-getPostWithComments(1);
