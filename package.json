@@ -13,5 +13,8 @@
     "koa": "^2.14.2",
     "koa-body": "^6.0.1",
     "node-fetch": "^2.6.12"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.0.2"
   }
 }
