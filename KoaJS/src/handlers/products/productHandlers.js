@@ -1,7 +1,7 @@
 const {getAll: getAllProducts, getOne: getOneProducts, add: addProduct} = require("../../database/productsRepository");
 /**
  *
- * @returns {Promise<void>}
+ * @returns {number}
  * @param a
  * @param b
  */
@@ -9,13 +9,18 @@ const {getAll: getAllProducts, getOne: getOneProducts, add: addProduct} = requir
 function compareByCreatedAt(a, b) {
     return a.createdAt.localeCompare(b.createdAt);
 }
+function compareById(a, b) {
+    return a.id - b.id; // Compare products by ID
+}
 async function getProducts(ctx) {
     try {
         const limit = parseInt(ctx.query.limit) || getAllProducts().length;
-        const sortDirection = ctx.query.sort || "asc";
+        const sortDirection = ctx.query.sort;
         let sortedProducts = [...getAllProducts()];
 
-        if (sortDirection === "asc") {
+        if(!sortDirection) {
+            sortedProducts.sort(compareById);
+        } else if (sortDirection === "asc") {
             sortedProducts.sort(compareByCreatedAt);
         } else if (sortDirection === "desc") {
             sortedProducts.sort((a, b) => compareByCreatedAt(b, a));
@@ -71,6 +76,7 @@ async function getProduct(ctx) {
 async function save(ctx) {
     try {
         const postData = ctx.request.body;
+        postData.createdAt = new Date().toISOString();
         addProduct(postData);
 
         ctx.status = 201;

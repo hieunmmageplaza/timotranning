@@ -38,7 +38,7 @@ async function fetchAllData() {
 
             const userComments = comments
                 .filter(comment => userPosts.some(post => post.id === comment.postId))
-                .map(post => ({id: post.id, title: post.title, body: post.body}));
+                .map(comment => ({id: comment.id, postID: comment.postId, name: comment.name ,body: comment.body}));
 
             return {
                 idUser: user.id,
