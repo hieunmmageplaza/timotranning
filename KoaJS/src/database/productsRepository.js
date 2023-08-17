@@ -20,8 +20,28 @@ function add(data) {
     }));
 }
 
+function deletePro(id) {
+    const updatedProducts = products.filter(product => product.id !== parseInt(id));
+    fs.writeFileSync('./src/database/products.json', JSON.stringify({
+        data: updatedProducts
+    }));
+}
+
+function updateProduct(id, updatedData) {
+    const updatedProducts = products.map(product => {
+        if (product.id === parseInt(id)) {
+            return { ...product, ...updatedData };
+        }
+        return product;
+    });
+    return fs.writeFileSync('./src/database/products.json', JSON.stringify({data: updatedProducts }));
+}
+
 module.exports = {
     getOne,
     getAll,
-    add
+    add,
+    deletePro,
+    updateProduct
 };
+

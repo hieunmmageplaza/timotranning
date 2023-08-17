@@ -1,0 +1,31 @@
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr align="center">
+            <th>STT</th>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Product Type</th>
+            <th>Color</th>
+            <th>Description</th>
+            <th>Product Image</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% let i = 0 %>
+        <% products.forEach(function (product) {%>
+        <tr>
+            <td><%= ++i %></td>
+            <td><%= product.id %></td>
+            <td><%= product.name %></td>
+            <td><%= product.price %></td>
+            <td><%= product.type %></td>
+            <td><%= product.color %></td>
+            <td><%= product.description %></td>
+            <td><img src= <%= product.image %> width="100px" height="100px"></td>
+        </tr>
+        <% })%>
+        </tbody>
+    </table>
+</div>

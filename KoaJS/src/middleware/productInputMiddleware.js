@@ -5,16 +5,16 @@ async function productInputMiddleware(ctx, next) {
         const postData = ctx.request.body;
         let schema = yup.object().shape({
             id: yup.number().positive().integer().required(),
-            name: yup.string().required(),
-            price: yup.string().required(),
-            description: yup.string().required(),
-            productType: yup.string().required(),
-            color: yup.string().required(),
-            image: yup.string().required(),
+            name: yup.string(),
+            price: yup.number(),
+            description: yup.string(),
+            productType: yup.string(),
+            color: yup.string(),
+            image: yup.string(),
         });
 
         await schema.validate(postData);
-        next();
+        await next();
     } catch (e) {
         ctx.status = 400;
         ctx.body = {

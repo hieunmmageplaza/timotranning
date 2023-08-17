@@ -1,1 +1,105 @@
-{"data":[{"id":11,"name":"ahihi","price":"12345","description":"TEST123413412321FDSADSASA ASDASDASD ASDASDASDASDADASDA","productType":"Towels","color":"red","image":"https://loremflickr.com/640/480/cats?lock=184334019461120","createdAt":"2023-08-17T07:51:48.210Z"},{"id":1,"name":"Unbranded Steel Bacon","price":"270.00","description":"New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart","productType":"Bike","color":"magenta","createdAt":"2023-07-05T14:16:00.676Z","image":"https://loremflickr.com/640/480/cats?lock=8190059979210752"},{"id":2,"name":"Gorgeous Metal Soap","price":"838.00","description":"The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality","productType":"Mouse","color":"grey","createdAt":"2024-05-09T01:05:24.624Z","image":"https://loremflickr.com/640/480/cats?lock=2316826136543232"},{"id":3,"name":"Unbranded Metal Table","price":"211.00","description":"The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J","productType":"Mouse","color":"plum","createdAt":"2023-05-28T02:40:26.270Z","image":"https://loremflickr.com/640/480/cats?lock=5791960195399680"},{"id":4,"name":"Handcrafted Rubber Cheese","price":"906.00","description":"The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J","productType":"Chicken","color":"lime","createdAt":"2024-04-04T22:31:44.759Z","image":"https://loremflickr.com/640/480/cats?lock=8120435923222528"},{"id":5,"name":"Handmade Fresh Computer","price":"682.00","description":"The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design","productType":"Fish","color":"teal","createdAt":"2022-10-26T12:02:31.508Z","image":"https://loremflickr.com/640/480/cats?lock=4144671362121728"},{"id":6,"name":"Awesome Bronze Keyboard","price":"756.00","description":"Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals","productType":"Shirt","color":"orange","createdAt":"2024-05-09T11:14:28.114Z","image":"https://loremflickr.com/640/480/cats?lock=3798565723832320"},{"id":7,"name":"Small Plastic Chips","price":"155.00","description":"The Football Is Good For Training And Recreational Purposes","productType":"Mouse","color":"olive","createdAt":"2022-09-14T13:54:36.407Z","image":"https://loremflickr.com/640/480/cats?lock=4058936074305536"},{"id":8,"name":"Small Metal Bacon","price":"176.00","description":"New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016","productType":"Mouse","color":"green","createdAt":"2023-01-06T08:43:29.975Z","image":"https://loremflickr.com/640/480/cats?lock=1946393434390528"},{"id":9,"name":"Small Concrete Table","price":"145.00","description":"The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients","productType":"Car","color":"green","createdAt":"2023-04-20T06:32:28.284Z","image":"https://loremflickr.com/640/480/cats?lock=7845157034524672"},{"id":10,"name":"Bespoke Rubber Chair","price":"870.00","description":"The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J","productType":"Towels","color":"white","createdAt":"2023-12-08T11:00:27.849Z","image":"https://loremflickr.com/640/480/cats?lock=184334019461120"},{"id":12,"name":"ahihi","price":"12345","description":"TEST123413412321FDSADSASA ASDASDASD ASDASDASDASDADASDA","productType":"Towels","color":12345,"image":"https://loremflickr.com/640/480/cats?lock=184334019461120","createdAt":"2023-08-17T09:35:44.166Z"}]}
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Awesome Rubber Towels",
+      "price": "851.00",
+      "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+      "productType": "Sausages",
+      "color": "sky blue",
+      "createdAt": "2023-07-10T06:49:39.064Z",
+      "image": "https://loremflickr.com/640/480/cats?lock=909018279182336"
+    },
+    {
+      "id": 2,
+      "name": "Luxurious Wooden Soap",
+      "price": "511.00",
+      "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+      "productType": "Chicken",
+      "color": "yellow",
+      "createdAt": "2024-06-27T15:34:45.687Z",
+      "image": "https://loremflickr.com/640/480/cats?lock=7877483093295104"
+    },
+    {
+      "id": 3,
+      "name": "Intelligent Cotton Bacon",
+      "price": "136.00",
+      "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+      "productType": "Computer",
+      "color": "magenta",
+      "createdAt": "2023-12-13T09:50:37.185Z",
+      "image": "https://loremflickr.com/640/480/cats?lock=5542458660225024"
+    },
+    {
+      "id": 4,
+      "name": "Intelligent Frozen Keyboard",
+      "price": "101.00",
+      "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+      "productType": "Bike",
+      "color": "olive",
+      "createdAt": "2023-07-31T00:48:24.751Z",
+      "image": "https://loremflickr.com/640/480/cats?lock=5216250529579008"
+    },
+    {
+      "id": 5,
+      "name": "Licensed Soft Bike",
+      "price": "311.00",
+      "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+      "productType": "Table",
+      "color": "grey",
+      "createdAt": "2022-11-08T20:12:39.888Z",
+      "image": "https://loremflickr.com/640/480/cats?lock=3838148645748736"
+    },
+    {
+      "id": 6,
+      "name": "Fantastic Metal Table",
+      "price": "627.00",
+      "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+      "productType": "Pants",
+      "color": "black",
+      "createdAt": "2024-02-20T05:54:58.226Z",
+      "image": "https://loremflickr.com/640/480/cats?lock=3585350517653504"
+    },
+    {
+      "id": 7,
+      "name": "Oriental Frozen Hat",
+      "price": "475.00",
+      "description": "The Football Is Good For Training And Recreational Purposes",
+      "productType": "Table",
+      "color": "mint green",
+      "createdAt": "2023-01-19T18:57:58.574Z",
+      "image": "https://loremflickr.com/640/480/cats?lock=5623192659951616"
+    },
+    {
+      "id": 8,
+      "name": "Recycled Rubber Pizza",
+      "price": "641.00",
+      "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+      "productType": "Computer",
+      "color": "gold",
+      "createdAt": "2023-11-29T17:36:31.684Z",
+      "image": "https://loremflickr.com/640/480/cats?lock=1956916303495168"
+    },
+    {
+      "id": 9,
+      "name": "Intelligent Cotton Soap",
+      "price": "507.00",
+      "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+      "productType": "Cheese",
+      "color": "olive",
+      "createdAt": "2023-04-07T04:40:32.197Z",
+      "image": "https://loremflickr.com/640/480/cats?lock=1269772884901888"
+    },
+    {
+      "id": 10,
+      "name": "Refined Metal Pants",
+      "price": "636.00",
+      "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+      "productType": "Bike",
+      "color": "violet",
+      "createdAt": "2023-03-03T01:44:06.161Z",
+      "image": "https://loremflickr.com/640/480/cats?lock=1375006443438080"
+    }
+  ]
+}
+

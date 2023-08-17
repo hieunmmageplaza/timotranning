@@ -1,4 +1,10 @@
-const {getAll: getAllProducts, getOne: getOneProducts, add: addProduct} = require("../../database/productsRepository");
+const {
+    getAll: getAllProducts,
+    getOne: getOneProducts,
+    add: addProduct,
+    deletePro: deletePro,
+    updateProduct: updatePro
+} = require("../../database/productsRepository");
 /**
  *
  * @returns {number}
@@ -16,6 +22,7 @@ async function getProducts(ctx) {
     try {
         const limit = parseInt(ctx.query.limit) || getAllProducts().length;
         const sortDirection = ctx.query.sort;
+        const fields = ctx.query.fields;
         let sortedProducts = [...getAllProducts()];
 
         if(!sortDirection) {
@@ -27,8 +34,25 @@ async function getProducts(ctx) {
         }
         const limitedAndSortedProducts = sortedProducts.slice(0, limit);
 
+        let filteredProducts = [];
+
+        if (fields) {
+            const listFields = fields.split(',');
+            limitedAndSortedProducts.map(product => {
+                const filteredProduct = {};
+                listFields.forEach(field => {
+                    if (product.hasOwnProperty(field)) {
+                        filteredProduct[field] = product[field];
+                    }
+                });
+                return filteredProduct;
+            })
+        } else {
+            filteredProducts = limitedAndSortedProducts;
+        }
+
         ctx.body = {
-            data: limitedAndSortedProducts
+            data: filteredProducts
         };
     } catch (e) {
         ctx.status = 404;
@@ -91,8 +115,70 @@ async function save(ctx) {
     }
 }
 
+async function delProduct(ctx) {
+    try {
+        const {id} = ctx.params;
+        const removedProduct = getOneProducts(id);
+            if (removedProduct) {
+                deletePro(id);
+
+                ctx.status = 201;
+                return ctx.body = {
+                    success: true,
+                    message: `Remove product with ID ${id}`
+
+                }
+            }
+
+        return ctx.body = {
+            status: 'error!',
+            message: 'Product Not Found'
+        };
+    } catch (e) {
+        return ctx.body = {
+            success: false,
+            error: e.message
+        }
+    }
+}
+
+async function updateProduct(ctx) {
+    try {
+        const { id } = ctx.params;
+        const updatedData = ctx.request.body;
+
+        const existingProduct = getOneProducts(id);
+
+        if (!existingProduct) {
+            ctx.status = 404;
+            ctx.body = {
+                success: false,
+                message: 'Product Not Found'
+            };
+            return;
+        }
+
+        const updatedProduct = { ...existingProduct, ...updatedData };
+        updatePro(id, updatedProduct);
+
+        ctx.status = 201;
+        ctx.body = {
+            success: true,
+            message: `Product with ID ${id} has been updated`
+        };
+    } catch (e) {
+        ctx.status = 500;
+        ctx.body = {
+            success: false,
+            error: e.message
+        };
+    }
+}
+
 module.exports = {
     getProducts,
     getProduct,
-    save
+    save,
+    delProduct,
+    updateProduct
 };
