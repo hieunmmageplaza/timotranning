@@ -14,7 +14,7 @@ function getOne(id) {
 }
 
 function add(data) {
-    const updatedProducts = [data, ...products];
+    const updatedProducts = [...products,data];
     return fs.writeFileSync('./src/database/products.json', JSON.stringify({
         data: updatedProducts
     }));

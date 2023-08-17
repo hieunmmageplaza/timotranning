@@ -20,5 +20,5 @@ function createRandomUser(record) {
 }
 
 
-fs.writeFileSync('./products.json', JSON.stringify({data: createRandomUser(1000)}, null, 2));
+fs.writeFileSync('./products.json', JSON.stringify({data: createRandomUser(10)}, null, 2));
 console.log('generated Data done');
