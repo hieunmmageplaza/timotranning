@@ -25,6 +25,7 @@ async function getProducts(ctx) {
         const fields = ctx.query.fields;
         let sortedProducts = [...getAllProducts()];
 
+        //sort products desc or asc
         if(!sortDirection) {
             sortedProducts.sort(compareById);
         } else if (sortDirection === "asc") {
@@ -33,9 +34,9 @@ async function getProducts(ctx) {
             sortedProducts.sort((a, b) => compareByCreatedAt(b, a));
         }
         const limitedAndSortedProducts = sortedProducts.slice(0, limit);
+        //sort products desc or asc
 
         let filteredProducts = [];
-
         if (fields) {
             const listFields = fields.split(',');
             limitedAndSortedProducts.map(product => {
