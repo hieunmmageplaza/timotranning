@@ -1,16 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
-import {Button, Card, Layout, Page, ResourceList} from "@shopify/polaris";
-
+import {AppProvider, Button, Layout, Page} from "@shopify/polaris";
+import en from "@shopify/polaris/locales/en.json";
 function App() {
-  return (
-    <Page title={'todo'}>
-      <Layout>
-        <Layout.Section>
-            <Button>Add product</Button>
-        </Layout.Section>
-      </Layout>
-    </Page>
+    return (
+        <AppProvider i18n={en}>
+            <Page title={'todo'}>
+                <Layout>
+                    <Layout.Section>
+                        <Button>Add product</Button>
+                    </Layout.Section>
+                </Layout>
+            </Page>
+        </AppProvider>
   );
 }
 
