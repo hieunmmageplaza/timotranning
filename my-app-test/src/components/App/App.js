@@ -10,8 +10,8 @@ function App() {
     try {
       const response = await fetch("https://jsonplaceholder.typicode.com/todos");
       const data = await response.json();
-      setTodos(data);
-      // setTodos([...data].splice(0, 10));
+      // setTodos(data);
+      setTodos([...data].splice(0, 10));
     } catch (error) {
       console.error(error);
     }
@@ -25,7 +25,7 @@ function App() {
     console.log(newTodos)
     setTodos(newTodos);
   };
-//Updating To-Do Items
+
   const completeTodo = index => {
     const newTodos = [...todos];
     newTodos[index].completed = true;

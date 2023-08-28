@@ -25,8 +25,8 @@ function TodoForm({ addTodo }) {
             } else {
                 console.error("Failed to add todo.");
             }
-        } catch (error) {
-            console.error("An error occurred:", error);
+        } catch (e) {
+            console.error(e);
         }
     };
 
