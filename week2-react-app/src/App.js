@@ -13,6 +13,8 @@ import {
 import en from "@shopify/polaris/locales/en.json";
 import React, {useCallback, useState} from "react";
 import TodoResourceList from "./TodoResourceList";
+import './App.css';
+import CreateToDo from "./CreateToDo";
 
 function App() {
 
@@ -22,23 +24,15 @@ function App() {
         [],
     );
 
-    const [todo, setTodo] = useState(false);
-    const [email, setEmail] = useState('');
-
-    const handleSubmit = useCallback(() => {
-        setEmail('');
-        setTodo(false);
-    }, []);
-
     return (
         <AppProvider i18n={en}>
             <Page title={'To-Dos'}>
                 <Layout>
                     <Layout.Section>
                         <Card>
-                            <Form onSubmit={handleSubmit}>
-                                <Button>Create Todo</Button>
-                                <h2>Showing 2 todos</h2>
+                            <Form>
+                                <CreateToDo/>
+                                <h2>Showing 3 todos</h2>
                                 <TodoResourceList/>
                             </Form>
                         </Card>

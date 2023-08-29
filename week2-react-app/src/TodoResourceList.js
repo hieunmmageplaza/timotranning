@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Badge, Button, Checkbox, ResourceItem, ResourceList } from "@shopify/polaris";
+import React, {useState} from 'react';
+import {Badge, Button, Checkbox, ResourceItem, ResourceList, Stack} from "@shopify/polaris";
 
 
-function CheckboxExample({ id, selected, onChange }) {
+function CheckboxExample({id, selected, onChange}) {
     return (
         <Checkbox
             label=""
@@ -16,28 +16,26 @@ function TodoResourceList() {
     const [todos, setTodos] = useState([
         {
             id: '100',
-            name: 'Mae Jemison',
+            name: 'Create React App',
             isComplete: false
         },
         {
             id: '101',
-            name: 'Minh hieu ngye',
+            name: 'Get Started Immediately',
             isComplete: false
         },
         {
             id: '200',
-            name: 'Ellen Ochoa',
+            name: 'Selecting a template',
             isComplete: true
         },
     ]);
     const [selectedIds, setSelectedIds] = useState([]);
 
-
-
     const checkComplete = (todoId) => {
         const updatedTodos = todos.map(todo => {
             if (todo.id === todoId) {
-                return { ...todo, isComplete: true };
+                return {...todo, isComplete: true};
             }
             return todo;
         });
@@ -66,7 +64,7 @@ function TodoResourceList() {
     const handleCompleteSelected = () => {
         const updatedTodos = todos.map(todo => {
             if (selectedIds.includes(todo.id)) {
-                return { ...todo, isComplete: true };
+                return {...todo, isComplete: true};
             }
             return todo;
         });
@@ -77,35 +75,42 @@ function TodoResourceList() {
         <ResourceList
             items={todos}
             renderItem={(item) => {
-                const { id, name, isComplete } = item;
+                const {id, name, isComplete} = item;
 
                 return (
                     <ResourceItem id={id}>
                         <div className="todo-item">
-                            <CheckboxExample
-                                id={id}
-                                selected={selectedIds.includes(id)}
-                                onChange={handleCheckboxChange}
-                                disabled={isComplete}
-                                checked={isComplete}/>
-                            <div className="todo" style={{ textDecoration: isComplete ? "line-through" : "" }}>
-                                {name}
-                            </div>
-                            <div className="badge-container">
-                                {isComplete ? (
-                                    <Badge status="success">Done</Badge>
-                                ) : (
-                                    <Badge>Pending</Badge>
-                                )}
-                            </div>
-                            <div className="button-container">
-                                {!isComplete && (
-                                    <Button onClick={() => checkComplete(id)} >Complete</Button>
-                                )}
-                                <Button onClick={() => checkRemove(id)}>Remove</Button>
-                                {selectedIds.length > 0 && (
-                                    <Button onClick={handleRemoveSelected}>Remove Selected</Button>
-                                )}
+
+                            <div className="todo" style={{textDecoration: isComplete ? "line-through" : ""}}>
+                                <Stack>
+                                    <Stack.Item fill>
+                                        <CheckboxExample
+                                            id={id}
+                                            selected={selectedIds.includes(id)}
+                                            onChange={handleCheckboxChange}
+                                            disabled={isComplete}
+                                            checked={isComplete}/>
+                                        {name}
+                                    </Stack.Item>
+                                    <Stack.Item>
+                                        {isComplete ? (
+                                            <Badge status="success">Done</Badge>
+                                        ) : (
+                                            <Badge>Pending</Badge>
+                                        )}
+                                    </Stack.Item>
+                                    <Stack.Item>
+                                        {!isComplete && (
+                                            <Button onClick={() => checkComplete(id)}>Complete</Button>
+                                        )}
+                                    </Stack.Item>
+                                    <Stack.Item>
+                                        <Button destructive onClick={() => checkRemove(id)}>Remove</Button>
+                                        {selectedIds.length > 0 && (
+                                            <Button onClick={handleRemoveSelected}>Remove Selected</Button>
+                                        )}
+                                    </Stack.Item>
+                                </Stack>
                             </div>
                         </div>
                     </ResourceItem>
