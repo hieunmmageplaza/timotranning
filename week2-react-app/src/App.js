@@ -15,25 +15,43 @@ import React, {useCallback, useState} from "react";
 import TodoResourceList from "./TodoResourceList";
 import './App.css';
 import CreateToDo from "./CreateToDo";
+import TopBarE from "./TopBarE";
 
 function App() {
-
-    const [checked, setChecked] = useState(false);
-    const handleChange = useCallback(
-        (newChecked: boolean) => setChecked(newChecked),
-        [],
-    );
+    const [todos, setTodos] = useState([
+        {
+            id: '100',
+            name: 'Create React App',
+            isComplete: false
+        },
+        {
+            id: '101',
+            name: 'Get Started Immediately',
+            isComplete: false
+        },
+        {
+            id: '200',
+            name: 'Selecting a template',
+            isComplete: true
+        },
+        {
+            id: '201',
+            name: 'Set Ahihi',
+            isComplete: false
+        },
+    ]);
 
     return (
         <AppProvider i18n={en}>
             <Page title={'To-Dos'}>
                 <Layout>
                     <Layout.Section>
+                        <TopBarE/>
+                        <CreateToDo/>
                         <Card>
                             <Form>
-                                <CreateToDo/>
-                                <h2>Showing 3 todos</h2>
-                                <TodoResourceList/>
+                                <h2>Showing {todos.length} todos</h2>
+                                <TodoResourceList todos={todos} setTodos={setTodos}/>
                             </Form>
                         </Card>
                     </Layout.Section>

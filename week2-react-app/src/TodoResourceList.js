@@ -12,24 +12,8 @@ function CheckboxExample({id, selected, onChange}) {
     );
 }
 
-function TodoResourceList() {
-    const [todos, setTodos] = useState([
-        {
-            id: '100',
-            name: 'Create React App',
-            isComplete: false
-        },
-        {
-            id: '101',
-            name: 'Get Started Immediately',
-            isComplete: false
-        },
-        {
-            id: '200',
-            name: 'Selecting a template',
-            isComplete: true
-        },
-    ]);
+function TodoResourceList({ todos, setTodos }) {
+
     const [selectedIds, setSelectedIds] = useState([]);
 
     const checkComplete = (todoId) => {
@@ -106,7 +90,7 @@ function TodoResourceList() {
                                     </Stack.Item>
                                     <Stack.Item>
                                         <Button destructive onClick={() => checkRemove(id)}>Remove</Button>
-                                        {selectedIds.length > 0 && (
+                                        {selectedIds.length > 1 && (
                                             <Button onClick={handleRemoveSelected}>Remove Selected</Button>
                                         )}
                                     </Stack.Item>
