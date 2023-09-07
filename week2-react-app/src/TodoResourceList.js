@@ -66,7 +66,7 @@ function TodoResourceList({ todos, setTodos }) {
                         <div className="todo-item">
 
                             <div className="todo" style={{textDecoration: isComplete ? "line-through" : ""}}>
-                                <Stack>
+                                <Stack alignment="center">
                                     <Stack.Item fill>
                                         <CheckboxExample
                                             id={id}

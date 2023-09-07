@@ -1,4 +1,4 @@
-import {Button, Modal, TextContainer, TextField} from '@shopify/polaris';
+import {Button, FormLayout, Modal, TextContainer, TextField} from '@shopify/polaris';
 import {useState, useCallback} from 'react';
 
 function CreateToDo() {
@@ -27,9 +27,7 @@ function CreateToDo() {
                 ]}
             >
                 <Modal.Section>
-                    <TextContainer>
-                        <TextField/>
-                    </TextContainer>
+                            <TextField label="" onChange={() => {}}  value='123'/>
                 </Modal.Section>
             </Modal>
         </div>
