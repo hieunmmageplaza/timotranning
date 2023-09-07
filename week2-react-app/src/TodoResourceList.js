@@ -1,20 +1,38 @@
-import React, {useState} from 'react';
-import {Badge, Button, Checkbox, ResourceItem, ResourceList, Stack} from "@shopify/polaris";
+import React, {useCallback, useState} from 'react';
+import {
+    Badge,
+    Button,
+    Checkbox,
+    DisplayText,
+    Modal,
+    ResourceItem,
+    ResourceList,
+    Stack,
+    TextField
+} from "@shopify/polaris";
 
-
-function CheckboxExample({id, selected, onChange}) {
-    return (
-        <Checkbox
-            label=""
-            checked={selected}
-            onChange={() => onChange(id)}
-        />
-    );
-}
-
-function TodoResourceList({ todos, setTodos }) {
+function TodoResourceList({todos, setTodos}) {
 
     const [selectedIds, setSelectedIds] = useState([]);
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [newTodoName, setNewTodoName] = useState('');
+
+    const handleNewTodoName = useCallback((value) => {
+        setNewTodoName(value);
+    }, []);
+
+    const handleAddTodo = () =>{
+        const newTodo = {
+            id: todos.length + 1,
+            name: newTodoName,
+            isComplete: false,
+        };
+
+        setTodos([...todos, newTodo]);
+
+        setIsOpenModal(false);
+        setNewTodoName('');
+    }
 
     const checkComplete = (todoId) => {
         const updatedTodos = todos.map(todo => {
@@ -31,14 +49,6 @@ function TodoResourceList({ todos, setTodos }) {
         setTodos(updatedTodos);
     };
 
-    const handleCheckboxChange = (todoId) => {
-        if (selectedIds.includes(todoId)) {
-            setSelectedIds(selectedIds.filter(id => id !== todoId));
-        } else {
-            setSelectedIds([...selectedIds, todoId]);
-        }
-    };
-
     const handleRemoveSelected = () => {
         const updatedTodos = todos.filter(todo => !selectedIds.includes(todo.id));
         setTodos(updatedTodos);
@@ -47,6 +57,8 @@ function TodoResourceList({ todos, setTodos }) {
 
     const handleCompleteSelected = () => {
         const updatedTodos = todos.map(todo => {
+
+            console.log(selectedIds);
             if (selectedIds.includes(todo.id)) {
                 return {...todo, isComplete: true};
             }
@@ -55,52 +67,89 @@ function TodoResourceList({ todos, setTodos }) {
         setTodos(updatedTodos);
         setSelectedIds([]);
     };
+
+    const promotedBulkActions = [
+        {
+            content: 'Complete',
+            onAction: handleCompleteSelected,
+        },
+        {
+            content: 'Remove',
+            onAction: handleRemoveSelected,
+        },
+    ];
+
     return (
-        <ResourceList
-            items={todos}
-            renderItem={(item) => {
-                const {id, name, isComplete} = item;
+        <>
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '0 20px'}}>
+                <DisplayText>
+                    <h2>Todos</h2>
+                </DisplayText>
+                <Button primary onClick={() => setIsOpenModal(true)}>Create Todo</Button>
+            </div>
+            <Modal
+                title="Create a new Todo"
+                open={isOpenModal}
+                onClose={() => setIsOpenModal(false)}
+                primaryAction={{
+                    content: 'Create',
+                    onAction: handleAddTodo,
+                }}
+                secondaryActions={[
+                    {
+                        content: 'Cancel',
+                        onAction: () => setIsOpenModal(false),
+                    },
+                ]}
+            >
+                <Modal.Section>
+                    <TextField
+                        value={newTodoName}
+                        onChange={handleNewTodoName}
+                        autoComplete="off"
+                        label=""
+                    />
+                </Modal.Section>
+            </Modal>
+            <ResourceList
+                items={todos}
+                selectedItems = {selectedIds}
+                onSelectionChange = {setSelectedIds}
+                promotedBulkActions = {promotedBulkActions}
+                renderItem={(item) => {
+                    const {id, name, isComplete} = item;
+                    return (
+                        <ResourceItem id={id}>
+                            <div className="todo-item">
 
-                return (
-                    <ResourceItem id={id}>
-                        <div className="todo-item">
-
-                            <div className="todo" style={{textDecoration: isComplete ? "line-through" : ""}}>
-                                <Stack alignment="center">
-                                    <Stack.Item fill>
-                                        <CheckboxExample
-                                            id={id}
-                                            selected={selectedIds.includes(id)}
-                                            onChange={handleCheckboxChange}
-                                            disabled={isComplete}
-                                            checked={isComplete}/>
-                                        {name}
-                                    </Stack.Item>
-                                    <Stack.Item>
-                                        {isComplete ? (
-                                            <Badge status="success">Done</Badge>
-                                        ) : (
-                                            <Badge>Pending</Badge>
-                                        )}
-                                    </Stack.Item>
-                                    <Stack.Item>
-                                        {!isComplete && (
-                                            <Button onClick={() => checkComplete(id)}>Complete</Button>
-                                        )}
-                                    </Stack.Item>
-                                    <Stack.Item>
-                                        <Button destructive onClick={() => checkRemove(id)}>Remove</Button>
-                                        {selectedIds.length > 1 && (
-                                            <Button onClick={handleRemoveSelected}>Remove Selected</Button>
-                                        )}
-                                    </Stack.Item>
-                                </Stack>
+                                <div className="todo" style={{textDecoration: isComplete ? "line-through" : ""}}>
+                                    <Stack alignment="center">
+                                        <Stack.Item fill>
+                                                    {name}
+                                        </Stack.Item>
+                                        <Stack.Item>
+                                            {isComplete ? (
+                                                <Badge status="success">Done</Badge>
+                                            ) : (
+                                                <Badge>Pending</Badge>
+                                            )}
+                                        </Stack.Item>
+                                        <Stack.Item>
+                                            {!isComplete && (
+                                                <Button onClick={() => checkComplete(id)}>Complete</Button>
+                                            )}
+                                        </Stack.Item>
+                                        <Stack.Item>
+                                            <Button destructive onClick={() => checkRemove(id)}>Remove</Button>
+                                        </Stack.Item>
+                                    </Stack>
+                                </div>
                             </div>
-                        </div>
-                    </ResourceItem>
-                );
-            }}
-        />
+                        </ResourceItem>
+                    );
+                }}
+            />
+        </>
     );
 }
 

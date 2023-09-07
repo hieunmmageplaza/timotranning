@@ -54,7 +54,7 @@ function TopBarE() {
     );
 
     return (
-        <div style={{height: '50px'}}>
+        <div style={{height: '80px'}}>
             <Frame topBar={topBarMarkup} logo={logo} />
         </div>
     );

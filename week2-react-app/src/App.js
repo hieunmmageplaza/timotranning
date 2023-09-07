@@ -3,7 +3,6 @@ import {AppProvider, Card, FormLayout, Layout, Page} from "@shopify/polaris";
 import en from "@shopify/polaris/locales/en.json";
 import React, {useState} from "react";
 import TodoResourceList from "./TodoResourceList";
-import CreateToDo from "./CreateToDo";
 import TopBarE from "./TopBarE";
 
 function App() {
@@ -33,14 +32,12 @@ function App() {
 
     return (
         <AppProvider i18n={en}>
-            <Page title={'To-Dos'}>
+            <Page>
                 <FormLayout>
                     <Layout.Section>
                         <TopBarE/>
-                        <CreateToDo/>
                         <Card>
-                                <h2>Showing {todos.length} todos</h2>
-                                <TodoResourceList todos={todos} setTodos={setTodos}/>
+                            <TodoResourceList todos={todos} setTodos={setTodos}/>
                         </Card>
                     </Layout.Section>
                 </FormLayout>
