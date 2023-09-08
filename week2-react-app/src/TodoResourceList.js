@@ -1,15 +1,5 @@
 import React, {useCallback, useState} from 'react';
-import {
-    Badge,
-    Button,
-    Checkbox,
-    DisplayText,
-    Modal,
-    ResourceItem,
-    ResourceList,
-    Stack,
-    TextField
-} from "@shopify/polaris";
+import {Badge, Button, DisplayText, Modal, ResourceItem, ResourceList, Stack, TextField} from "@shopify/polaris";
 
 function TodoResourceList({todos, setTodos}) {
 
@@ -21,7 +11,7 @@ function TodoResourceList({todos, setTodos}) {
         setNewTodoName(value);
     }, []);
 
-    const handleAddTodo = () =>{
+    const handleAddNewTodo = () => {
         const newTodo = {
             id: todos.length + 1,
             name: newTodoName,
@@ -83,7 +73,7 @@ function TodoResourceList({todos, setTodos}) {
         <>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '0 20px'}}>
                 <DisplayText>
-                    <h2>Todos</h2>
+                    Todos
                 </DisplayText>
                 <Button primary onClick={() => setIsOpenModal(true)}>Create Todo</Button>
             </div>
@@ -93,7 +83,7 @@ function TodoResourceList({todos, setTodos}) {
                 onClose={() => setIsOpenModal(false)}
                 primaryAction={{
                     content: 'Create',
-                    onAction: handleAddTodo,
+                    onAction: handleAddNewTodo,
                 }}
                 secondaryActions={[
                     {

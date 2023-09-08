@@ -28,7 +28,6 @@ function App() {
             isComplete: false
         },
     ]);
-    const [selectedIds, setSelectedIds] = useState([]);
 
     return (
         <AppProvider i18n={en}>

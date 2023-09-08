@@ -2,18 +2,6 @@ import {TopBar, Frame} from '@shopify/polaris';
 import {useState, useCallback} from 'react';
 
 function TopBarE() {
-    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-    const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false);
-
-    const toggleIsUserMenuOpen = useCallback(
-        () => setIsUserMenuOpen((isUserMenuOpen) => !isUserMenuOpen),
-        [],
-    );
-
-    const toggleIsSecondaryMenuOpen = useCallback(
-        () => setIsSecondaryMenuOpen((isSecondaryMenuOpen) => !isSecondaryMenuOpen),
-        [],
-    );
 
     const logo = {
         width: 124,
@@ -25,26 +13,7 @@ function TopBarE() {
         <TopBar.UserMenu
             name="Minh Hieu"
             initials="H"
-            open={isUserMenuOpen}
-            onToggle={toggleIsUserMenuOpen}
-        />
-    );
-
-    const secondaryMenuMarkup = (
-        <TopBar.Menu
-            activatorContent={
-                <span>
-        </span>
-            }
-            open={isSecondaryMenuOpen}
-            onOpen={toggleIsSecondaryMenuOpen}
-            onClose={toggleIsSecondaryMenuOpen}
-            actions={[
-                {
-                    items: [{content: 'Community forums'}],
-                },
-            ]}
-        />
+            actions={null}/>
     );
 
     const topBarMarkup = (
