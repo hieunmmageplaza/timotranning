@@ -31,10 +31,10 @@ function App() {
 
     return (
         <AppProvider i18n={en}>
+            <TopBarE/>
             <Page>
                 <FormLayout>
                     <Layout.Section>
-                        <TopBarE/>
                         <Card>
                             <TodoResourceList todos={todos} setTodos={setTodos}/>
                         </Card>

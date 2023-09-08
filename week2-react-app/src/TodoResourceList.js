@@ -39,13 +39,13 @@ function TodoResourceList({todos, setTodos}) {
         setTodos(updatedTodos);
     };
 
-    const handleRemoveSelected = () => {
+    const removeSelected = () => {
         const updatedTodos = todos.filter(todo => !selectedIds.includes(todo.id));
         setTodos(updatedTodos);
         setSelectedIds([]);
     };
 
-    const handleCompleteSelected = () => {
+    const completeSelected = () => {
         const updatedTodos = todos.map(todo => {
 
             console.log(selectedIds);
@@ -61,11 +61,11 @@ function TodoResourceList({todos, setTodos}) {
     const promotedBulkActions = [
         {
             content: 'Complete',
-            onAction: handleCompleteSelected,
+            onAction: completeSelected,
         },
         {
             content: 'Remove',
-            onAction: handleRemoveSelected,
+            onAction: removeSelected,
         },
     ];
 
@@ -111,7 +111,6 @@ function TodoResourceList({todos, setTodos}) {
                     return (
                         <ResourceItem id={id}>
                             <div className="todo-item">
-
                                 <div className="todo" style={{textDecoration: isComplete ? "line-through" : ""}}>
                                     <Stack alignment="center">
                                         <Stack.Item fill>
