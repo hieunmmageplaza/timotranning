@@ -1,30 +1,11 @@
 import React, {useCallback, useState} from 'react';
-import {Badge, Button, DisplayText, Modal, ResourceItem, ResourceList, Stack, TextField} from "@shopify/polaris";
+import {Badge, Button, ResourceItem, ResourceList, Stack} from "@shopify/polaris";
 
 function TodoResourceList({todos, setTodos}) {
 
     const [selectedIds, setSelectedIds] = useState([]);
-    const [isOpenModal, setIsOpenModal] = useState(false);
-    const [newTodoName, setNewTodoName] = useState('');
 
-    const handleNewTodoName = useCallback((value) => {
-        setNewTodoName(value);
-    }, []);
-
-    const handleAddNewTodo = () => {
-        const newTodo = {
-            id: todos.length + 1,
-            name: newTodoName,
-            isComplete: false,
-        };
-
-        setTodos([...todos, newTodo]);
-
-        setIsOpenModal(false);
-        setNewTodoName('');
-    }
-
-    const checkComplete = (todoId) => {
+    const handleComplete = (todoId) => {
         const updatedTodos = todos.map(todo => {
             if (todo.id === todoId) {
                 return {...todo, isComplete: true};
@@ -34,7 +15,7 @@ function TodoResourceList({todos, setTodos}) {
         setTodos(updatedTodos);
     };
 
-    const checkRemove = (todoId) => {
+    const handleRemove = (todoId) => {
         const updatedTodos = todos.filter(todo => todo.id !== todoId);
         setTodos(updatedTodos);
     };
@@ -70,37 +51,6 @@ function TodoResourceList({todos, setTodos}) {
     ];
 
     return (
-        <>
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '0 20px'}}>
-                <DisplayText>
-                    Todos
-                </DisplayText>
-                <Button primary onClick={() => setIsOpenModal(true)}>Create Todo</Button>
-            </div>
-            <Modal
-                title="Create a new Todo"
-                open={isOpenModal}
-                onClose={() => setIsOpenModal(false)}
-                primaryAction={{
-                    content: 'Create',
-                    onAction: handleAddNewTodo,
-                }}
-                secondaryActions={[
-                    {
-                        content: 'Cancel',
-                        onAction: () => setIsOpenModal(false),
-                    },
-                ]}
-            >
-                <Modal.Section>
-                    <TextField
-                        value={newTodoName}
-                        onChange={handleNewTodoName}
-                        autoComplete="off"
-                        label=""
-                    />
-                </Modal.Section>
-            </Modal>
             <ResourceList
                 items={todos}
                 selectedItems = {selectedIds}
@@ -125,11 +75,11 @@ function TodoResourceList({todos, setTodos}) {
                                         </Stack.Item>
                                         <Stack.Item>
                                             {!isComplete && (
-                                                <Button onClick={() => checkComplete(id)}>Complete</Button>
+                                                <Button onClick={() => handleComplete(id)}>Complete</Button>
                                             )}
                                         </Stack.Item>
                                         <Stack.Item>
-                                            <Button destructive onClick={() => checkRemove(id)}>Remove</Button>
+                                            <Button destructive onClick={() => handleRemove(id)}>Remove</Button>
                                         </Stack.Item>
                                     </Stack>
                                 </div>
@@ -138,7 +88,6 @@ function TodoResourceList({todos, setTodos}) {
                     );
                 }}
             />
-        </>
     );
 }
 
