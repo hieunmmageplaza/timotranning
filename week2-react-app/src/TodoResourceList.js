@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useState} from 'react';
 import {Badge, Button, ResourceItem, ResourceList, Stack} from "@shopify/polaris";
 
 function TodoResourceList({todos, setTodos}) {
@@ -6,37 +6,31 @@ function TodoResourceList({todos, setTodos}) {
     const [selectedIds, setSelectedIds] = useState([]);
 
     const handleComplete = (todoId) => {
-        const updatedTodos = todos.map(todo => {
-            if (todo.id === todoId) {
-                return {...todo, isComplete: true};
+        setTodos((todos) => {
+                todos.map((todo) =>
+                    todo.id === todoId ? {...todo, isComplete: true} : todo
+                )
             }
-            return todo;
-        });
-        setTodos(updatedTodos);
+        );
     };
 
     const handleRemove = (todoId) => {
-        const updatedTodos = todos.filter(todo => todo.id !== todoId);
-        setTodos(updatedTodos);
+        setTodos((todos) => todos.filter(({ id }) => id !== todoId));
     };
 
     const removeSelected = () => {
-        const updatedTodos = todos.filter(todo => !selectedIds.includes(todo.id));
-        setTodos(updatedTodos);
+        setTodos((todos) => todos.filter((todo) => !selectedIds.includes(todo.id)));
         setSelectedIds([]);
     };
 
     const completeSelected = () => {
-        const updatedTodos = todos.map(todo => {
-
-            console.log(selectedIds);
-            if (selectedIds.includes(todo.id)) {
-                return {...todo, isComplete: true};
-            }
-            return todo;
+        setTodos((todos) => {
+            const updatedTodos = todos.map((todo) =>
+                selectedIds.includes(todo.id) ? { ...todo, isComplete: true } : todo
+            );
+            setSelectedIds([]);
+            return updatedTodos;
         });
-        setTodos(updatedTodos);
-        setSelectedIds([]);
     };
 
     const promotedBulkActions = [
@@ -63,15 +57,11 @@ function TodoResourceList({todos, setTodos}) {
                             <div className="todo-item">
                                 <div className="todo" style={{textDecoration: isComplete ? "line-through" : ""}}>
                                     <Stack alignment="center">
-                                        <Stack.Item fill>
-                                                    {name}
-                                        </Stack.Item>
+                                        <Stack.Item fill>{name}</Stack.Item>
                                         <Stack.Item>
-                                            {isComplete ? (
-                                                <Badge status="success">Done</Badge>
-                                            ) : (
-                                                <Badge>Pending</Badge>
-                                            )}
+                                            <Badge status={isComplete ? 'success' : ''}>
+                                                {isComplete ? 'Done' : 'Pending'}
+                                            </Badge>
                                         </Stack.Item>
                                         <Stack.Item>
                                             {!isComplete && (

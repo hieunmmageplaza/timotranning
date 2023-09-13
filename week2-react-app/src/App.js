@@ -1,9 +1,10 @@
 import './App.css';
-import {AppProvider, Card, FormLayout, Layout, Modal, Page, TextField} from "@shopify/polaris";
+import {AppProvider, Card, FormLayout, Layout, Page} from "@shopify/polaris";
 import en from "@shopify/polaris/locales/en.json";
-import React, {useCallback, useState} from "react";
+import React, {useState} from "react";
 import TodoResourceList from "./TodoResourceList";
 import TopBarE from "./TopBarE";
+import NewTodoModal from "./NewTodoModal";
 
 function App() {
     const [todos, setTodos] = useState([
@@ -28,25 +29,8 @@ function App() {
             isComplete: false
         },
     ]);
+
     const [isOpenModal, setIsOpenModal] = useState(false);
-    const [newTodoName, setNewTodoName] = useState('');
-
-    const handleAddNewTodo = () => {
-        const newTodo = {
-            id: todos.length + 1,
-            name: newTodoName,
-            isComplete: false,
-        };
-
-        setTodos([...todos, newTodo]);
-
-        setIsOpenModal(false);
-        setNewTodoName('');
-    }
-
-    const handleNewTodoName = useCallback((value) => {
-        setNewTodoName(value);
-    }, []);
 
     return (
         <AppProvider i18n={en}>
@@ -58,31 +42,7 @@ function App() {
                     onClick: () => setIsOpenModal(true)
                 }}
             >
-                <Modal
-                    title="Create a new Todo"
-                    open={isOpenModal}
-                    onClose={() => setIsOpenModal(false)}
-                    primaryAction={{
-                        content: 'Create',
-                        onAction: handleAddNewTodo,
-                    }}
-                    secondaryActions={[
-                        {
-                            content: 'Cancel',
-                            onAction: () => setIsOpenModal(false),
-                        },
-                    ]}
-                >
-                    <Modal.Section>
-                        <TextField
-                            value={newTodoName}
-                            onChange={handleNewTodoName}
-                            autoComplete="off"
-                            label=""
-                        />
-                    </Modal.Section>
-                </Modal>
-
+                <NewTodoModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} todos={todos} setTodos={setTodos} />
                 <FormLayout>
                     <Layout.Section>
                         <Card>
