@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Badge, Button, ResourceItem, ResourceList, Stack} from "@shopify/polaris";
+import {Badge, Button, DisplayText, ResourceItem, ResourceList, Stack, Thumbnail} from "@shopify/polaris";
 
 function ResourceItems({todos, setTodos}) {
 
@@ -10,19 +10,37 @@ function ResourceItems({todos, setTodos}) {
             id: 1,
             text1: 'Getting to design the',
             text2: 'Setting up the data',
-            text3: 'a day ago'
+            text3: 'From March 8 ,2021',
+            media: (
+                <Thumbnail
+                    source="https://burst.shopifycdn.com/photos/tucan-scarf_373x@2x.jpg"
+                    alt="Tucan scarf"
+                />
+            )
         },
         {
             id: 2,
             text1: 'Getting to design the',
             text2: 'Setting up the data',
-            text3: 'a day ago'
+            text3: 'From March 8 ,2021',
+            media: (
+                <Thumbnail
+                    source="https://burst.shopifycdn.com/photos/tucan-scarf_373x@2x.jpg"
+                    alt="Tucan scarf"
+                />
+            )
         },
         {
             id: 3,
             text1: 'Getting to design the',
             text2: 'Setting up the data',
-            text3: 'a day ago'
+            text3: 'From March 8 ,2021',
+            media: (
+                <Thumbnail
+                    source="https://burst.shopifycdn.com/photos/tucan-scarf_373x@2x.jpg"
+                    alt="Tucan scarf"
+                />
+            )
         }
     ])
 
@@ -40,22 +58,22 @@ function ResourceItems({todos, setTodos}) {
     return (
         <ResourceList
             items={testItems}
-            promotedBulkActions={promotedBulkActions}
+            promotedBulkActions
             renderItem={(item) => {
-                const {id, text1, text2, text3} = item;
+                const {id, text1, text2, text3, media } = item;
                 return (
-                    <ResourceItem id={id}>
-                        <div className="todo-item">
-                            <div className="todo">
-                                <Stack alignment="center">
-                                    <Stack.Item fill>{text1}</Stack.Item>
+                    <ResourceItem id={id} media={media}>
+                        <Stack >
+                            <Stack.Item fill>
+                                {text1}
+                                <div>SKU: 1</div>
+                                <div> a day ago</div>
+                            </Stack.Item>
+                            <Stack.Item>
+                                {text3}
+                            </Stack.Item>
+                        </Stack>
 
-                                    <Stack.Item>
-                                            ahihi
-                                    </Stack.Item>
-                                </Stack>
-                            </div>
-                        </div>
                     </ResourceItem>
                 );
             }}

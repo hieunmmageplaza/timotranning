@@ -5,6 +5,7 @@ import React from "react";
 import TopBarE from "./TopBarE";
 import NavigationE from "./Navigation";
 import ResourceItems from "./ResourceItems";
+import PaginationExample from "./Pagination";
 
 function App() {
 
@@ -16,12 +17,12 @@ function App() {
                     <Layout.Section>
                         <Card>
                             <DisplayText size="large">Notifications</DisplayText>
-
                             <DisplayText size="small">List of sales notification from Shopify</DisplayText>
                             <ResourceItems/>
                         </Card>
                     </Layout.Section>
                 </Layout>
+                <PaginationExample/>
             </Page>
             <NavigationE/>
         </AppProvider>
