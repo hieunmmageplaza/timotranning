@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.custom-range-slider {
+  width: 300px;
+}
+
+.custom-range-slider .Polaris-RangeSlider-SingleThumb__Input {
+  appearance:auto !important;
+}

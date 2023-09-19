@@ -1,5 +1,4 @@
 import {TopBar, Frame} from '@shopify/polaris';
-import {useState, useCallback} from 'react';
 
 function TopBarE() {
 

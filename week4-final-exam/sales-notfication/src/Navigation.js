@@ -1,5 +1,5 @@
 import {Frame, Navigation} from '@shopify/polaris';
-import {HomeMinor, NotificationMajor, OrdersMinor, ProductsMinor, SettingsMajor} from '@shopify/polaris-icons';
+import {HomeMinor, NotificationMajor, SettingsMajor} from '@shopify/polaris-icons';
 import React from 'react';
 
 function NavigationE() {

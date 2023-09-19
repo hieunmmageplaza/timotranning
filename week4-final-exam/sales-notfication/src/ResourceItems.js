@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {Badge, Button, DisplayText, ResourceItem, ResourceList, Stack, Thumbnail} from "@shopify/polaris";
+import { ResourceItem, ResourceList, Stack, Thumbnail} from "@shopify/polaris";
 
-function ResourceItems({todos, setTodos}) {
+function ResourceItems() {
 
     const [selectedIds, setSelectedIds] = useState([]);
 
@@ -46,11 +46,11 @@ function ResourceItems({todos, setTodos}) {
 
     const promotedBulkActions = [
         {
-            content: 'Complete',
+            // content: 'Complete',
             // onAction:
         },
         {
-            content: 'Remove',
+            // content: 'Remove',
             // onAction:
         },
     ];
@@ -58,9 +58,15 @@ function ResourceItems({todos, setTodos}) {
     return (
         <ResourceList
             items={testItems}
-            promotedBulkActions
+            promotedBulkActions ={promotedBulkActions}
+            selectedItems={selectedIds}
+            onSelectionChange={setSelectedIds}
+            sortOptions={[
+                {label: 'Newest update', value: '1'},
+                {label: 'Oldest update', value: '2'},
+            ]}
             renderItem={(item) => {
-                const {id, text1, text2, text3, media } = item;
+                const {id, text1, text3, media } = item;
                 return (
                     <ResourceItem id={id} media={media}>
                         <Stack >
