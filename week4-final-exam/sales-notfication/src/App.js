@@ -1,5 +1,15 @@
 import './App.css';
-import {AppProvider, Card, DisplayText, Layout, Page, Tabs} from "@shopify/polaris";
+import {
+    AppProvider,
+    Card,
+    DisplayText, Frame,
+    Layout, Navigation,
+    Page,
+    SkeletonBodyText, SkeletonDisplayText,
+    SkeletonPage,
+    Tabs,
+    TextContainer
+} from "@shopify/polaris";
 import en from "@shopify/polaris/locales/en.json";
 import React, {useCallback, useState} from "react";
 import NavigationE from "./Navigation";
@@ -9,6 +19,11 @@ import SelectExample from "./SelectInput";
 import CheckboxExample from "./CheckBox";
 import RangeSliderExample from "./RangeSlider";
 import DisplayPositionItem from "./DisplayPositionItem";
+import {ConversationMinor, HomeMajor, OrdersMajor} from "@shopify/polaris-icons";
+
+function LegacyCard(props: { sectioned: boolean, children: ReactNode }) {
+    return null;
+}
 
 function App() {
     const [selected, setSelected] = useState(0);
@@ -109,11 +124,91 @@ function App() {
             </Layout>
             <PaginationExample/>
         </Page>);
-    return (
+
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [modalActive, setModalActive] = useState(false);
+
+
+    const toggleIsLoading = useCallback(
+        () => setIsLoading((isLoading) => !isLoading),
+        [],
+    );
+    const toggleModalActive = useCallback(
+        () => setModalActive((modalActive) => !modalActive),
+        [],
+    );
+
+
+    const navigationMarkup = (
+        <Navigation>
+            <Navigation.Section
+                separator
+                title="Jaded Pixel App"
+                items={[
+                    {
+                        label: 'Dashboard',
+                        icon: HomeMajor,
+                        onClick: toggleIsLoading,
+                    },
+                    {
+                        label: 'Jaded Pixel Orders',
+                        icon: OrdersMajor,
+                        onClick: toggleIsLoading,
+                    },
+                ]}
+                action={{
+                    icon: ConversationMinor,
+                    accessibilityLabel: 'Contact support',
+                    onClick: toggleModalActive,
+                }}
+            />
+        </Navigation>
+    );
+
+    const actualPageMarkup = (
+        <Page title="Account">
+            <Layout>
+                <Layout.AnnotatedSection
+                    title="Account details"
+                    description="Jaded Pixel will use this as your account information."
+                >
+                    <Card sectioned>
+                        test111
+                    </Card>
+                </Layout.AnnotatedSection>
+            </Layout>
+        </Page>
+    );
+
+    const loadingPageMarkup = (
+        <SkeletonPage>
+            <Layout>
+                <Layout.Section>
+                    <LegacyCard sectioned>
+                        <TextContainer>
+                            <SkeletonDisplayText size="small" />
+                            <SkeletonBodyText lines={9} />
+                        </TextContainer>
+                    </LegacyCard>
+                </Layout.Section>
+            </Layout>
+        </SkeletonPage>
+    );
+
+    const pageMarkup = isLoading ? loadingPageMarkup : actualPageMarkup;
+
+
+return (
+        <>
         <AppProvider i18n={en}>
             {/*<TopBarE/>*/}
-            <NavigationE children={<PageContent/>}/>
+            {/*<NavigationE children={<PageContent/>}/>*/}
+            <Frame navigation={navigationMarkup}>
+                {pageMarkup}
+            </Frame>
         </AppProvider>
+        </>
     );
 }
 
