@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import { ResourceItem, ResourceList, Stack, Thumbnail} from "@shopify/polaris";
+import {ResourceItem, ResourceList, Stack} from "@shopify/polaris";
+import NotificationsItem from "./NotificationsItem";
 
 function ResourceItems() {
 
@@ -8,39 +9,27 @@ function ResourceItems() {
     const [testItems,setTestItems] = useState([
         {
             id: 1,
-            text1: 'Getting to design the',
-            text2: 'Setting up the data',
+            text1: 'Someone in New York, United States1',
+            text2: 'Puschased Sport Senaker',
             text3: 'From March 8 ,2021',
-            media: (
-                <Thumbnail
-                    source="https://burst.shopifycdn.com/photos/tucan-scarf_373x@2x.jpg"
-                    alt="Tucan scarf"
-                />
-            )
+            text4: 'a day ago',
+            media: "https://burst.shopifycdn.com/photos/tucan-scarf_373x@2x.jpg"
         },
         {
             id: 2,
-            text1: 'Getting to design the',
-            text2: 'Setting up the data',
+            text1: 'Someone in New York, United States2',
+            text2: 'Puschased Sport Senaker',
             text3: 'From March 8 ,2021',
-            media: (
-                <Thumbnail
-                    source="https://burst.shopifycdn.com/photos/tucan-scarf_373x@2x.jpg"
-                    alt="Tucan scarf"
-                />
-            )
+            text4: 'a day ago',
+            media: "https://burst.shopifycdn.com/photos/tucan-scarf_373x@2x.jpg"
         },
         {
             id: 3,
-            text1: 'Getting to design the',
-            text2: 'Setting up the data',
+            text1: 'Someone in New York, United States3',
+            text2: 'Purchased Sport Sneaker',
             text3: 'From March 8 ,2021',
-            media: (
-                <Thumbnail
-                    source="https://burst.shopifycdn.com/photos/tucan-scarf_373x@2x.jpg"
-                    alt="Tucan scarf"
-                />
-            )
+            text4: 'a day ago',
+            media: "https://burst.shopifycdn.com/photos/tucan-scarf_373x@2x.jpg"
         }
     ])
 
@@ -66,21 +55,20 @@ function ResourceItems() {
                 {label: 'Oldest update', value: '2'},
             ]}
             renderItem={(item) => {
-                const {id, text1, text3, media } = item;
+                const {id, text1, text2, text3, text4, media } = item;
                 return (
-                    <ResourceItem id={id} media={media}>
+                    <div className="Polaris-ResourceItem">
+                        <ResourceItem id={id}>
                         <Stack >
                             <Stack.Item fill>
-                                {text1}
-                                <div>SKU: 1</div>
-                                <div> a day ago</div>
+                                <NotificationsItem text1={text1} text2={text2} text4={text4} media={media} />
                             </Stack.Item>
                             <Stack.Item>
                                 {text3}
                             </Stack.Item>
                         </Stack>
-
                     </ResourceItem>
+                    </div>
                 );
             }}
         />
