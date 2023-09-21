@@ -5,7 +5,7 @@ import {Icon} from "@shopify/polaris";
 function NotificationsItem({text1, text2, text4, media}) {
     return (
         <>
-            <div className="container">
+            <div className="Polaris-NotificationsItem container">
                 <div className="left">
                     <img src={media} alt="Hình ảnh" width="100%"/>
                 </div>
