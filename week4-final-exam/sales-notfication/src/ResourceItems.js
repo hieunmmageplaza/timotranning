@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {ResourceItem, ResourceList, Stack} from "@shopify/polaris";
-import NotificationsItem from "./NotificationsItem";
+import NotificationsItem from "./components/NotificationsItem";
 
 function ResourceItems() {
 

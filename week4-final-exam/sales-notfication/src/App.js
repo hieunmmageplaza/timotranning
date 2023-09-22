@@ -1,12 +1,12 @@
 import './App.css';
 import {
-    AppProvider,
+    AppProvider, Button,
     Card,
     DisplayText,
     Frame,
     Layout,
     Navigation,
-    Page, PageActions,
+    Page,
     SettingToggle,
     Tabs,
     TextStyle
@@ -14,13 +14,13 @@ import {
 import en from "@shopify/polaris/locales/en.json";
 import React, {useCallback, useState} from "react";
 import ResourceItems from "./ResourceItems";
-import PaginationExample from "./Pagination";
-import SelectExample from "./SelectInput";
-import CheckboxExample from "./CheckBox";
-import RangeSliderExample from "./RangeSlider";
-import DisplayPositionItem from "./DisplayPositionItem";
+import PaginationExample from "./components/Pagination";
+import SelectExample from "./components/SelectInput";
+import CheckboxExample from "./components/CheckBox";
+import RangeSliderExample from "./components/RangeSlider";
+import DisplayPositionItem from "./components/DisplayPositionItem";
 import {ConversationMinor, HomeMajor, NotificationMajor, SettingsMajor} from "@shopify/polaris-icons";
-import NotificationsItem from "./NotificationsItem";
+import NotificationsItem from "./components/NotificationsItem";
 
 
 function App() {
@@ -40,6 +40,10 @@ function App() {
         }
     ];
 
+    const [desktopPosition,setDesktopPosition] = useState('bottom-left');
+    const [hideTimeAgo,setHideTimeAgo] = useState(false);
+    const [truncateProductName,setTruncateProductName] = useState(false);
+
     const handleTabChange = useCallback(
         (selectedTabIndex: number) => setSelected(selectedTabIndex),
         [],
@@ -56,20 +60,6 @@ function App() {
     //         </Layout>
     //         <PaginationExample/>
     //     </Page>);
-
-
-    const [isLoading, setIsLoading] = useState(false);
-    const [modalActive, setModalActive] = useState(false);
-
-
-    const toggleIsLoading = useCallback(
-        () => setIsLoading((isLoading) => !isLoading),
-        [],
-    );
-    const toggleModalActive = useCallback(
-        () => setModalActive((modalActive) => !modalActive),
-        [],
-    );
 
     const [currentPage, setCurrentPage] = useState('actualPage');
 
@@ -93,11 +83,6 @@ function App() {
                         onClick: () => setCurrentPage('page3'),
                     },
                 ]}
-                action={{
-                    icon: ConversationMinor,
-                    accessibilityLabel: 'Contact support',
-                    onClick: toggleModalActive,
-                }}
             />
         </Navigation>
     );
@@ -134,12 +119,17 @@ function App() {
             </Layout>
         </Page>
     );
+    const handleSave = () => {
+        console.log('testttttttttttttttttttttttttttt');
+    };
     const settingPage = (
         <Page title="Setting"
               subtitle="Decide how your notifications will display"
               fullWidth primaryAction={{
             content: 'Save',
+            onclick: handleSave
         }}>
+            <Button primary onClick={handleSave}>test</Button>
             <Layout>
                 <Layout.Section secondary>
                     <Card>
